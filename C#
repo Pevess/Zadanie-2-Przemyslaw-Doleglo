@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+
+class Activity
+{
+    public string Name { get; set; }
+    public string Time { get; set; }
+
+    public Activity(string name, string time)
+    {
+        Name = name;
+        Time = time;
+    }
+
+    public override string ToString()
+    {
+        return $"Activity: {Name}, Time: {Time}";
+    }
+}
+
+class Destination
+{
+    public string Name { get; set; }
+    public string Country { get; set; }
+    public List<Activity> Activities { get; set; }
+
+    public Destination(string name, string country)
+    {
+        Name = name;
+        Country = country;
+        Activities = new List<Activity>();
+    }
+
+    public void AddActivity(Activity activity)
+    {
+        Activities.Add(activity);
+    }
+
+    public void ShowActivities()
+    {
+        Console.WriteLine($"Activities for {Name}, {Country}:");
+        foreach (var activity in Activities)
+        {
+            Console.WriteLine(activity);
+        }
+    }
+}
+
+class Trip
+{
+    public string TripName { get; set; }
+    public Destination Destination { get; set; }
+
+    public Trip(string tripName, Destination destination)
+    {
+        TripName = tripName;
+        Destination = destination;
+    }
+
+    public void DisplayTrip()
+    {
+        Console.WriteLine($"Trip: {TripName}");
+        Destination.ShowActivities();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Activity activity1 = new Activity("Visit Museum", "10:00 AM");
+        Activity activity2 = new Activity("Lunch at local restaurant", "12:00 PM");
+        Activity activity3 = new Activity("Explore the city center", "2:00 PM");
+
+        Destination destination = new Destination("Florence", "Italy");
+        destination.AddActivity(activity1);
+        destination.AddActivity(activity2);
+        destination.AddActivity(activity3);
+
+        Trip trip = new Trip("Summer in Italy", destination);
+        trip.DisplayTrip();
+    }
+}
