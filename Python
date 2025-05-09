@@ -1,0 +1,42 @@
+class Activity:
+    def __init__(self, name, time):
+        self.name = name
+        self.time = time
+    
+    def __str__(self):
+        return f"Activity: {self.name}, Time: {self.time}"
+
+class Destination:
+    def __init__(self, name, country):
+        self.name = name
+        self.country = country
+        self.activities = []
+    
+    def add_activity(self, activity):
+        self.activities.append(activity)
+    
+    def show_activities(self):
+        print(f"Activities for {self.name}, {self.country}:")
+        for activity in self.activities:
+            print(activity)
+
+class Trip:
+    def __init__(self, trip_name, destination):
+        self.trip_name = trip_name
+        self.destination = destination
+    
+    def display_trip(self):
+        print(f"Trip: {self.trip_name}")
+        self.destination.show_activities()
+
+activity1 = Activity("Visit Museum", "10:00 AM")
+activity2 = Activity("Lunch at local restaurant", "12:00 PM")
+activity3 = Activity("Explore the city center", "2:00 PM")
+
+destination = Destination("Florence", "Italy")
+destination.add_activity(activity1)
+destination.add_activity(activity2)
+destination.add_activity(activity3)
+
+trip = Trip("Summer in Italy", destination)
+trip.display_trip()
